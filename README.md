@@ -2,10 +2,10 @@
 
 Client for StatsD (Golang)
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/sokil/go-statsd-client)](https://goreportcard.com/report/github.com/sokil/go-statsd-client)
-[![GoDoc](https://godoc.org/github.com/sokil/go-statsd-client?status.svg)](https://godoc.org/github.com/sokil/go-statsd-client)
-[![Build Status](https://travis-ci.org/sokil/go-statsd-client.svg?branch=master)](https://travis-ci.org/sokil/go-statsd-client)
-[![Code Climate](https://codeclimate.com/github/sokil/go-statsd-client/badges/gpa.svg)](https://codeclimate.com/github/sokil/go-statsd-client)
+[![Go Report Card](https://goreportcard.com/badge/github.com/GoMetric/go-statsd-client)](https://goreportcard.com/report/github.com/GoMetric/go-statsd-client)
+[![GoDoc](https://godoc.org/github.com/GoMetric/go-statsd-client?status.svg)](https://godoc.org/github.com/sokil/go-statsd-client)
+[![Build Status](https://travis-ci.org/GoMetric/go-statsd-client.svg?branch=master)](https://travis-ci.org/sokil/go-statsd-client)
+[![Code Climate](https://codeclimate.com/github/GoMetric/go-statsd-client/badges/gpa.svg)](https://codeclimate.com/github/GoMetric/go-statsd-client)
 
 ## Usage
 
