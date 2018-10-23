@@ -36,4 +36,4 @@ client.Flush()                                 # send all metrics as one packet 
 
 ## See also
 
-* [HTTP proxy to StatsD with REST interface for using in browsers](https://github.com/sokil/statsd-http-proxy)
+* [HTTP proxy to StatsD with REST interface for using in browsers](https://github.com/GoMetric/statsd-http-proxy)
