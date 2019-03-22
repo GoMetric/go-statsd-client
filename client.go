@@ -95,6 +95,7 @@ func (client *Client) Count(key string, value int, sampleRate float32) {
 }
 
 // Gauge track
+// To set a gauge to a negative number you need first set it to 0, because negative value interprets as negative shift.
 func (client *Client) Gauge(key string, value int) {
 	metricValue := fmt.Sprintf("%d|%s", value, metricTypeGauge)
 	client.addToBuffer(key, metricValue)
