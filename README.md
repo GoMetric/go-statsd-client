@@ -27,7 +27,7 @@ Creating unbuffered client:
 ```go
 client := NewClient("127.0.0.1", 9876)  # create client
 client.Open()                           # open connection to StatsD
-client.Count('a.b.c', 42, 0.7)          # set count metric and send it to StatsD
+client.Count("a.b.c", 42, 0.7)          # set count metric and send it to StatsD
 ```
 
 Creating buffered client:
@@ -35,8 +35,19 @@ Creating buffered client:
 ```go
 client := NewBufferedClient("127.0.0.1", 9876) # create client
 client.Open()                                  # open connection to StatsD
-client.Count('a.b.c', 42, 0.7)                 # set count metric and add it to buffer
-client.Timing('a.b.d', 43)                     # set timing metric and add it to buffer
+client.Count("a.b.c", 42, 0.7)                 # set count metric and add it to buffer
+client.Timing("a.b.d", 43)                     # set timing metric and add it to buffer
+client.Flush()                                 # send all metrics as one packet to StatsD
+```
+
+Add metric prefix to all keys:
+
+```go
+client := NewBufferedClient("127.0.0.1", 9876) # create client
+client.SetPrefix("prefix")                     # set prefix to all keys
+client.Open()                                  # open connection to StatsD
+client.Count("a.b.c", 42, 0.7)                 # set count metric "prefix.a.b.c" and add it to buffer
+client.Timing("a.b.d", 43)                     # set timing metric "prefix.a.b.d" and add it to buffer
 client.Flush()                                 # send all metrics as one packet to StatsD
 ```
 
