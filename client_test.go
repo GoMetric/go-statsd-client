@@ -133,6 +133,35 @@ func TestBufferedClient_Count_NoRate(t *testing.T) {
 	}
 }
 
+func TestBufferedClient_MetricPrefix_Empty(t *testing.T) {
+	client := NewBufferedClient("127.0.0.1", 9876)
+	client.Count("a.b.c", 320, 1)
+
+	if client.keyBuffer[0] != "a.b.c:320|c" {
+		t.Errorf("Wrong count metric without rate: \"%s\"", client.keyBuffer[0])
+	}
+}
+
+func TestBufferedClient_MetricPrefix_NotEmptyNoDot(t *testing.T) {
+	client := NewBufferedClient("127.0.0.1", 9876)
+	client.SetPrefix("somePrefix")
+	client.Count("a.b.c", 320, 1)
+
+	if client.keyBuffer[0] != "somePrefix.a.b.c:320|c" {
+		t.Errorf("Wrong count metric without rate: \"%s\"", client.keyBuffer[0])
+	}
+}
+
+func TestBufferedClient_MetricPrefix_NotEmptyWithDot(t *testing.T) {
+	client := NewBufferedClient("127.0.0.1", 9876)
+	client.SetPrefix("somePrefix.")
+	client.Count("a.b.c", 320, 1)
+
+	if client.keyBuffer[0] != "somePrefix.a.b.c:320|c" {
+		t.Errorf("Wrong count metric without rate: \"%s\"", client.keyBuffer[0])
+	}
+}
+
 func TestBufferedClient_Gauge(t *testing.T) {
 	client := NewBufferedClient("127.0.0.1", 9876)
 	client.Gauge("a.b.c", 320)

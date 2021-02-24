@@ -25,15 +25,17 @@ type Client struct {
 	keyBuffer     []string     // array of messages to send
 	keyBufferLock sync.RWMutex // mutex to lock buffer of keys
 	buffered      bool         // send metrics on every call
+	metricPrefix  string       // used to prefix all metrics before send
 }
 
 // NewClient creates new StatsD client with disabled buffer.
 func NewClient(host string, port int) *Client {
 	client := Client{
-		host:      host,
-		port:      port,
-		rand:      rand.New(rand.NewSource(time.Now().Unix())),
-		keyBuffer: nil,
+		host:         host,
+		port:         port,
+		rand:         rand.New(rand.NewSource(time.Now().Unix())),
+		keyBuffer:    nil,
+		metricPrefix: "",
 	}
 	return &client
 }
@@ -42,12 +44,22 @@ func NewClient(host string, port int) *Client {
 // Manual call of Flush() required to send metrics to StatsD server.
 func NewBufferedClient(host string, port int) *Client {
 	client := Client{
-		host:      host,
-		port:      port,
-		rand:      rand.New(rand.NewSource(time.Now().Unix())),
-		keyBuffer: make([]string, 0),
+		host:         host,
+		port:         port,
+		rand:         rand.New(rand.NewSource(time.Now().Unix())),
+		keyBuffer:    make([]string, 0),
+		metricPrefix: "",
 	}
 	return &client
+}
+
+// SetPrefix adds prefix to all keys
+func (client *Client) SetPrefix(metricPrefix string) {
+	if metricPrefix != "" && (metricPrefix)[len(metricPrefix)-1:] != "." {
+		metricPrefix = metricPrefix + "."
+	}
+
+	client.metricPrefix = metricPrefix
 }
 
 // Open UDP connection to statsd server
@@ -116,7 +128,7 @@ func (client *Client) Set(key string, value int) {
 // add to buffer and flush if auto flush enabled
 func (client *Client) addToBuffer(key string, metricValue string) {
 	// build metric
-	metric := fmt.Sprintf("%s:%s", key, metricValue)
+	metric := fmt.Sprintf("%s:%s", client.metricPrefix+key, metricValue)
 
 	// flush
 	if client.keyBuffer == nil {
