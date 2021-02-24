@@ -1,4 +1,4 @@
-# 1.1.0 (2021-02-25)
+# 1.1.1 (2021-02-25)
 
 * Allow set prefix to all keys
 
