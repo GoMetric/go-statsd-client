@@ -7,6 +7,12 @@ Client for StatsD (Golang)
 [![Build Status](https://travis-ci.org/GoMetric/go-statsd-client.svg?branch=master)](https://travis-ci.org/GoMetric/go-statsd-client)
 [![Code Climate](https://codeclimate.com/github/GoMetric/go-statsd-client/badges/gpa.svg)](https://codeclimate.com/github/GoMetric/go-statsd-client)
 
+## Installation
+
+```
+go get -u GoMetric/go-statsd-client
+```
+
 ## Usage
 
 Client may be in buffered and unbuffered mode.
