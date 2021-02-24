@@ -10,7 +10,7 @@ Client for StatsD (Golang)
 ## Installation
 
 ```
-go get -u GoMetric/go-statsd-client
+go get -u github.com/GoMetric/go-statsd-client
 ```
 
 ## Usage
